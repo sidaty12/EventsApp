@@ -1,5 +1,6 @@
 ﻿using EventsApp.Models;
 using EventsApp.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +9,7 @@ namespace EventsApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Organisateur")]
     public class EventsController : ControllerBase
     {
         private readonly IEventsService _eventsService;
@@ -17,7 +19,9 @@ namespace EventsApp.Controllers
             _eventsService = eventsService;
         }
 
+      
         [HttpPost]
+       
         public async Task<IActionResult> CreateEvent(Event @event)
         {
             var createdEvent = await _eventsService.CreateEventAsync(@event);
