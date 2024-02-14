@@ -31,7 +31,6 @@ namespace EventsApp.Controllers
             return Ok(events);
         }
 
-        // Méthode GetParticipant non implémentée ici. Assurez-vous d'ajouter une implémentation si nécessaire.
     }
 
 }

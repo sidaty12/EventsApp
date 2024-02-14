@@ -34,7 +34,7 @@ namespace EventsApp.Controllers
             }
         }
 
-        // Annuler l'inscription d'un participant à un événement
+        // Annuler l'inscription d'un participant à un événement 
         [HttpDelete("{eventId}/participants/{participantId}")]
         public async Task<IActionResult> CancelRegistration(int eventId, int participantId)
         {

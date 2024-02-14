@@ -1,5 +1,6 @@
 ﻿using EventsApp.Models;
 using EventsApp.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,7 +10,7 @@ namespace EventsApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Organisateur")]
+   
     public class EventsController : ControllerBase
     {
         private readonly IEventsService _eventsService;
@@ -19,16 +20,17 @@ namespace EventsApp.Controllers
             _eventsService = eventsService;
         }
 
-      
+
         [HttpPost]
-       
         public async Task<IActionResult> CreateEvent(Event @event)
         {
             var createdEvent = await _eventsService.CreateEventAsync(@event);
             return CreatedAtAction(nameof(GetEvent), new { id = createdEvent.Id }, createdEvent);
         }
-
+        
         [HttpGet("{id}")]
+        [Authorize(Roles= "Organisateur")]
+
         public async Task<ActionResult<Event>> GetEvent(int id)
         {
             var @event = await _eventsService.GetEventByIdAsync(id);
