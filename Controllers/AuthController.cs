@@ -66,6 +66,41 @@ namespace EventsApp.Controllers
             return Ok(new { Message = "Organisateur created successfully" });
         }
 
+        [HttpPost("createParticipant")]
+        public async Task<IActionResult> CreateParticipant([FromBody] RegisterModel registerModel)
+        {
+            if (await _userManager.FindByEmailAsync(registerModel.Email) != null)
+            {
+                return BadRequest("Email already exists");
+            }
+
+            var user = new ApplicationUser
+            {
+                Email = registerModel.Email,
+                UserName = registerModel.Name,
+                PasswordHash = registerModel.Password
+
+            };
+
+
+            var result = await _userManager.CreateAsync(user, registerModel.Password);
+
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors);
+            }
+
+            // Assuming you have an "Participant" role
+            if (!await _roleManager.RoleExistsAsync("Participant"))
+            {
+                await _roleManager.CreateAsync(new IdentityRole("Participant"));
+            }
+
+            await _userManager.AddToRoleAsync(user, "Participant");
+
+            return Ok(new { Message = "Participant created successfully" });
+        }
+
         [HttpPost]
         [Route("Login")]
         public async Task<IActionResult> Login(LoginModel model)

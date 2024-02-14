@@ -29,7 +29,7 @@ namespace EventsApp.Controllers
         }
         
         [HttpGet("{id}")]
-        [Authorize(Roles= "Organisateur")]
+        [Authorize(Roles= "Participant")]
 
         public async Task<ActionResult<Event>> GetEvent(int id)
         {
