@@ -1,0 +1,48 @@
+## Fichiers de build .NET
+bin/
+obj/
+out/
+
+## Fichiers de projets et de solutions Visual Studio
+.vs/
+.vscode/
+*.user
+*.userosscache
+*.suo
+*.userprefs
+*.ds_store
+*.cache
+*.csproj.dotsettings
+*.csproj.user
+*.nupkg
+*.nuspec
+
+## Fichiers de Build ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+## Rider
+.idea/
+
+## Fichiers de sauvegarde Visual Studio Code
+*.bak
+
+## Fichiers temporaires Windows
+[Tt]humbs.db
+[Dd]esktop.ini
+
+## Dossiers Node.js
+node_modules/
+
+## Dossier de packages NuGet
+packages/
+
+## Dossier de publication
+publish/
+
+## Fichiers de logs
+*.log
+
+## Autres fichiers spécifiques au système/développement
+*.swp
+*~
+._*
